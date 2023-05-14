@@ -1,15 +1,16 @@
-import { Switch, Routes, Link } from "react-router-dom";
-import { AddTodo, Navbar, Login, Signup, TodoList } from "./components";
-import { Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
+import { AddTodo, Signup, Login  } from "./components";
+import NavBar from "./components/NavBar";
+
 
 const App = () => {
   return (
     <div>
-      <Navbar />
-      <Routes>
+      <NavBar />
+      <Switch>
         <Route path="signup/" element={<Signup />} />
         <Route path="login/" element={<Login />} />
-      </Routes>
+      </Switch>
     </div>
   )
 }
