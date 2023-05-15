@@ -1,6 +1,7 @@
 import { Switch, Route, Link } from "react-router-dom";
-import { AddTodo, Signup, Login  } from "./components";
+import { AddTodo, Signup, Login, TodoList  } from "./components";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 import React from "react";
 
 
@@ -18,18 +19,23 @@ const App = () => {
     setUser(null);
   }
 
-  const singup = async (user = null) => {
+  // default user to null
+  const signup = async (user = null) => {
     setUser(user);
   }
 
 
   return (
-    <div>
+    <div className="w-2/3 mx-auto">
       <NavBar />
       <Switch>
-        <Route path="signup/" element={<Signup />} />
-        <Route path="login/" element={<Login />} />
+        <Route exact path={["/", "/todos"]} render={(props)=> <TodoList {...props} token={token} />} />
+        <Route exact path="/todos/create" render={(props)=> <AddTodo {...props} token={token} />} />
+        <Route exact path="/todos/:id/" render={(props)=> <AddTodo {...props} token={token} />} />
+        <Route exact path="/login" render={(props)=> <Login {...props} login={login} />} />
+        <Route exact path="/signup" render={(props)=> <Signup {...props} signup={signup} />} />
       </Switch>
+      <Footer />
     </div>
   )
 }

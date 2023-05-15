@@ -6,10 +6,8 @@ const NavBar = () => {
 
   return (
     <div 
-      className="w-2/3 mx-auto bg-blue-700 text-white rounded-xl py-3 px-5 mt-2 font-semibold
-            flex flex-row justify-around
-        "
-      
+      className="w-full mx-auto bg-blue-700 text-white rounded-xl py-3 px-5 mt-2 font-semibold
+      flex flex-row justify-around"
     >
         <div className="uppercase">
             Todo App
@@ -21,12 +19,10 @@ const NavBar = () => {
               : (
                 <>
                   <Link to="/Login" className="px-2">Login</Link>
-                  <Link to="/singup" className="px-2">signup</Link>
+                  <Link to="/signup" className="px-2">signup</Link>
                 </>
               )
-            
-            }
-            
+            }  
         </ul>
     </div>
   )
