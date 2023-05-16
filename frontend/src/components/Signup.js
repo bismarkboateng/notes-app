@@ -1,7 +1,50 @@
-const Signup = () => {
+import React from "react";
+
+
+
+const Signup = (props) => {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const onChangeUsername = e => {
+    const username = e.target.value;
+    setUsername(username);
+  }
+
+  const onChangePassword = e => {
+    const password = e.target.value;
+    setPassword(password);
+  }
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+    props.signup({username: username, password: password});
+    props.history.push("/");
+  }
+
   return (
-    <div>
-      Signup Component
+    <div className="w-1/2 mx-auto min-h-[100%]">
+      <h1 className="align-center text-3xl mt-3 text-blue-400">Sign up</h1>
+
+      <form onSubmit={handleSignup} className="mt-10 mb-10 p-2">
+        <label className="text-xl">Username</label> <br />
+        <input placeholder="Username" type="text" value={username} 
+          onChange={onChangeUsername}
+          className="focus:outline-none focus:border-blue-500 py-3 border-2 border-blue-500 rounded-xl px-5"
+        />
+
+        <hr className="mt-3 mb-3" />
+
+        <label>Password</label> <br />
+        <input placeholder="Password" type="password" value={password} 
+          onChange={onChangePassword}
+          className="focus:outline-none focus:border-blue-500 py-3 border-2 border-blue-500 rounded-xl px-5"
+        />
+
+        <hr className="mt-3 mb-3"/>
+        <button className="border border-blue-500 bg-blue-500 text-white px-4 py-3 rounded-xl" type="submit">sign Up</button>
+      </form> 
+    
     </div>
   )
 }

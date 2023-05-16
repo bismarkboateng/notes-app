@@ -16,7 +16,8 @@ const Login = (props) => {
     setPassword(password);
   }
 
-  const login = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
     props.login({username: username, password: password});
     props.history.push("/");
   }
@@ -24,8 +25,9 @@ const Login = (props) => {
   return (
     <div className="w-1/2 mx-auto min-h-[100%]">
       <h1 className="align-center text-3xl mt-3 text-blue-400">Login</h1>
-      <form className="mt-10 mb-10 p-2">
-        <lable className="text-xl">Username</lable> <br />
+
+      <form onSubmit={handleLogin} className="mt-10 mb-10 p-2">
+        <label className="text-xl">Username</label> <br />
         <input placeholder="Username" type="text" value={username} 
           onChange={onChangeUsername}
           className="focus:outline-none focus:border-blue-500 py-3 border-2 border-blue-500 rounded-xl px-5"
@@ -33,16 +35,16 @@ const Login = (props) => {
 
         <hr className="mt-3 mb-3" />
 
-        <lable>Password</lable> <br />
+        <label>Password</label> <br />
         <input placeholder="Password" type="password" value={password} 
           onChange={onChangePassword}
           className="focus:outline-none focus:border-blue-500 py-3 border-2 border-blue-500 rounded-xl px-5"
         />
 
         <hr className="mt-3 mb-3"/>
-        <button className="border border-blue-500 bg-blue-500 text-white px-4 py-3 rounded-xl"
-        onClick={login}>Login</button>
+        <button className="border border-blue-500 bg-blue-500 text-white px-4 py-3 rounded-xl" type="submit">Login</button>
       </form> 
+    
     </div>
   )
 }

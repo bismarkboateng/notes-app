@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import React from "react";
 import TodoDataService from "./services/todos";
 
+const TodoService = new TodoDataService();
 
 const App = () => {
   const [user, setUser] = React.useState(null);
@@ -13,7 +14,7 @@ const App = () => {
 
 
   const login = async (user = null) => {
-    TodoDataService.login(user)
+    TodoService.logging(user)
       .then(response => {
         setToken(response.data.token);
         setUser(user.username);
@@ -28,18 +29,32 @@ const App = () => {
   }
 
   const logout = async () => {
-    setUser(null);
+    setToken("");
+    setUser("");
+    // simply flushing away the current token and logged in user
+    localStorage.setItem("token", "");
+    localStorage.setItem("user", "");
   }
 
   // default user to null
   const signup = async (user = null) => {
-    setUser(user);
+    TodoService.signup(user)
+      .then(response => {
+        setToken(response.data.token);
+        setUser(user.username);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", user.username);
+      })
+      .catch( e => {
+        console.log(e);
+        setError(e.toString());
+      })
   }
 
 
   return (
     <div className="w-2/3 mx-auto">
-      <NavBar />
+      <NavBar logout={logout} user={user} />
       <Switch>
         <Route exact path={["/", "/todos"]} render={(props)=> <TodoList {...props} token={token} />} />
         <Route exact path="/todos/create" render={(props)=> <AddTodo {...props} token={token} />} />

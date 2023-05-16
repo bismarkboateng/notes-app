@@ -1,8 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
-  const [loginState, setLoginState] = useState(false)
+const NavBar = ({ logout, user }) => {
 
   return (
     <div 
@@ -14,8 +13,8 @@ const NavBar = () => {
         </div>
         <ul className="px-2">
             <Link to="/todos" className="px-2">Todos</Link>
-            { loginState 
-              ? ( <Link to="/logout" className="px-2">Logout</Link>)
+            { user 
+              ? ( <Link onClick={logout} className="px-2">Logout : { user } </Link>)
               : (
                 <>
                   <Link to="/Login" className="px-2">Login</Link>
