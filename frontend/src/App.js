@@ -3,6 +3,7 @@ import { AddTodo, Signup, Login, TodoList  } from "./components";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import React from "react";
+import TodoDataService from "./services/todos";
 
 
 const App = () => {
@@ -12,7 +13,18 @@ const App = () => {
 
 
   const login = async (user = null) => {
-    setUser(user);
+    TodoDataService.login(user)
+      .then(response => {
+        setToken(response.data.token);
+        setUser(user.username);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", user.username);
+        setError("");
+      })
+      .catch(e => {
+        console.log("login", e);
+         setError(e.toString());
+      })
   }
 
   const logout = async () => {
