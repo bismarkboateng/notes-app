@@ -4,11 +4,18 @@ import { Link } from "react-router-dom";
 
 const TodoObject = new TodoDataService();
 
-const AddTodo = () => {
+const AddTodo = (props) => {
 
   let editing = false;
   let initialTodoTitle = "";
   let initialTodoMemo = "";
+
+  if(props.location.state && props.location.state.currentTodo) {
+    editing = true;
+    initialTodoTitle = props.location.state.currentTodo.title;
+    initialTodoMemo = props.location.state.currentTodo.memo;
+  }
+
 
   const [title, setTitle] = useState(initialTodoTitle);
   const [memo, setMemo] = useState(initialTodoMemo);
@@ -31,13 +38,26 @@ const AddTodo = () => {
       completed: false
     }
 
-    TodoObject.createTodo(data, props.token)
-      .then(response => {
-        setSubmitted(true);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    if (editing){
+      TodoObject.updateTodo(props.location.state.currentTodo.id, data, props.token)
+        .then(response => {
+          setSubmitted(true);
+          console.log(response.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    }
+    else {
+
+      TodoObject.createTodo(data, props.token)
+        .then(response => {
+          setSubmitted(true);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
   }
 
 

@@ -40,7 +40,7 @@ const TodoList = (props) => {
               
                 <p>Date created: { moment(todo.created_at).format("Do MMMM YYYY")}  </p>
                 <div className="mt-2">
-                  <Link to={`/todos/${todo.id}`} className="mr-3">
+                  <Link to={{ pathname: "/todos/" + todo.id, state: { currentTodo: todo }}} className="mr-3">
                     <button className="bg-blue-500 text-white px-5 py-1 rounded">Edit</button>
                   </Link>
                   <button className="bg-red-500 text-white px-5 py-1 rounded" >Delete</button>
