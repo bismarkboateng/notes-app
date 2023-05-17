@@ -29,6 +29,9 @@ const TodoList = (props) => {
       ? (<div className="bg-red-100 p-10 rounded text-red-500"> You are not Logged in: Please <Link to="/login">login </Link>to see your todos</div>)
       : ( 
         <div>
+          <Link to={"/todos/create"}>
+            <button className="mb-3 bg-white-400 text-blue-300 border border-blue-400 px-1 py-2 rounded-lg">Add Todo</button>
+          </Link>
           { todos.map((todo) => (
             <div className="p-2">
               <div key={todo.id}>

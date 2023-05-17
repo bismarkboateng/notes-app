@@ -1,6 +1,6 @@
 import axios from "axios";
 
-class TodoDataService {
+export default class TodoDataService {
 
     getAll(token){
         axios.defaults.headers.common["Authorization"] = "Token " + token;
@@ -37,4 +37,4 @@ class TodoDataService {
 }
 
 
-export default TodoDataService;
+// export default TodoDataService;
